@@ -3,7 +3,6 @@ package jp.co.seattle.library.commonutil;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -30,7 +29,7 @@ public class BookUtil {
 		//TODO　各チェックNGの場合はエラーメッセージをリストに追加（タスク４）
 		List<String> errorList = new ArrayList<String>();
 		// 必須チェック
-		if (isEmptyBookInfo(bookInfo)){
+		if (isEmptyBookInfo(bookInfo)) {
 			errorList.add(REQUIRED_ERROR);
 		}
 
@@ -55,24 +54,16 @@ public class BookUtil {
 	 */
 	private static boolean checkDate(String publishDate) {
 		try {
-			
+
 			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 			formatter.setLenient(false); // ←これで厳密にチェックしてくれるようになる
 			//TODO　取得した日付の形式が正しければtrue（タスク４）
-			
-			// publishdateをDate型に変換
-			Date publishDateDate = formatter.parse(publishDate);
-			//変換したpublishDateをString型に変換
-			String publishDateString = formatter.format(publishDateDate);
-			//string型に変換したpublishdateと元々入力されたpublishdateをequalsで比較
-			if(publishDateString == publishDate) {
-				return true;
-			}
+			formatter.parse(publishDate);
 			return false;
-			
+
 		} catch (Exception p) {
 			p.printStackTrace();
-			return false;
+			return true;
 		}
 	}
 
@@ -84,8 +75,12 @@ public class BookUtil {
 	 */
 	private static boolean isValidIsbn(String isbn) {
 		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４）
-		if (isbn == "[0-9]{10|13}") {
-			return true;
+		if (!isbn.isEmpty()) {
+			if ((isbn.length() == 10 || isbn.length() == 13) && isbn.matches("^[0-9]+$")) {
+				return false; //空じゃなくて書き込まれてる
+			} else {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -98,10 +93,11 @@ public class BookUtil {
 	 */
 	private static boolean isEmptyBookInfo(BookDetailsInfo bookInfo) {
 		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）
-		if (!bookInfo.getTitle().isEmpty() && !bookInfo.getAuthor().isEmpty() && !bookInfo.getPublisher().isEmpty() && !bookInfo.getPublishDate().isEmpty()) {
+		if (!bookInfo.getTitle().isEmpty() && !bookInfo.getAuthor().isEmpty() && !bookInfo.getPublisher().isEmpty()
+				&& !bookInfo.getPublishDate().isEmpty()) {
 			return false;
-		}else {
-		return true;
+		} else {
+			return true;
 		}
 	}
 }
