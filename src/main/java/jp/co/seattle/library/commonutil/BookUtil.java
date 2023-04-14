@@ -78,7 +78,7 @@ public class BookUtil {
 	 */
 	private static boolean isValidIsbn(String isbn) {
 		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４）
-		if(!isbnisEmpty()) {
+		if(!isbn.isEmpty()) {
 			if(isbn.matches("[0-9]{10,13}")) {
 				return true;
 			}else {
@@ -88,10 +88,6 @@ public class BookUtil {
 		return true;
 	}
 
-	private static boolean isbnisEmpty() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
 	/**
 	 * 必須項目の存在チェック
 	 * 
