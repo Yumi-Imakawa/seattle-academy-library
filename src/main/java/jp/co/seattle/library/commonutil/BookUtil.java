@@ -57,7 +57,7 @@ public class BookUtil {
 			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 			formatter.setLenient(false); // ←これで厳密にチェックしてくれるようになる
 			//TODO　取得した日付の形式が正しければtrue（タスク４）
-			//dateをDate型に
+			//dateをDate型に変更
 			Date date = formatter.parse(publishDate);
 			//Date型をString型に変更
 			String strdate = new SimpleDateFormat("yyyyMMdd").format(date);
