@@ -45,6 +45,7 @@ public class BookUtil {
 		}
 		 return errorList;
 	}
+	
 	/**
 	 * 日付の形式が正しいかどうか
 	 * 
