@@ -60,7 +60,7 @@ public class BookUtil {
 			//dateをDate型に変更
 			Date date = formatter.parse(publishDate);
 			//Date型をString型に変更
-			String strdate = new SimpleDateFormat("yyyyMMdd").format(date);
+			String strdate = formatter.format(date);
 			//String型で比較　publishDate==strdate
 			if(publishDate.equals(strdate)) {
 				return true;
