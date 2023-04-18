@@ -3,6 +3,7 @@ package jp.co.seattle.library.commonutil;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -58,7 +59,14 @@ public class BookUtil {
 			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 			formatter.setLenient(false); // ←これで厳密にチェックしてくれるようになる
 			//TODO　取得した日付の形式が正しければtrue（タスク４）
-			formatter.parse(publishDate);
+			// publishdateをDate型に変換
+			Date publishDateDate = formatter.parse(publishDate);
+			//変換したpublishDateをString型に変換
+			String publishDateString = formatter.format(publishDateDate);
+			//string型に変換したpublishdateと元々入力されたpublishdateをequalsで比較
+			if (publishDateString.equals(publishDate)) {
+				return true;
+			}
 			return false;
 
 		} catch (Exception p) {
@@ -93,8 +101,8 @@ public class BookUtil {
 	 */
 	private static boolean isEmptyBookInfo(BookDetailsInfo bookInfo) {
 		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）
-		if (!bookInfo.getTitle().isEmpty() && !bookInfo.getAuthor().isEmpty() && !bookInfo.getPublisher().isEmpty()
-				&& !bookInfo.getPublishDate().isEmpty()) {
+		if (!bookInfo.getTitle().isEmpty() || !bookInfo.getAuthor().isEmpty() || !bookInfo.getPublisher().isEmpty()
+				|| !bookInfo.getPublishDate().isEmpty()) {
 			return false;
 		} else {
 			return true;
