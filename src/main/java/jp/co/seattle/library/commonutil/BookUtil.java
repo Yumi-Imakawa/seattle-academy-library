@@ -82,7 +82,7 @@ public class BookUtil {
 	private static boolean isValidIsbn(String isbn) {
 		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４）
 		if(!isbn.isEmpty()) {
-			if(isbn.matches("[0-9]{10,13}")) {
+			if(isbn.matches("^[0-9]*$") && (isbn.length() == 10 || isbn.length() ==13)) {
 				return true;
 			}else {
 				return false;
