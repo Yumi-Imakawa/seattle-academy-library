@@ -51,5 +51,16 @@ public class UsersService {
 			return null;
 		}
 	}
-
+	
+//	ユーザーのパスワードを変更する
+	public UserInfo passwordReset(String email, String password) {
+		try {
+			String sql = "ALTER USER users IDENTIFIED BY 'auth_string' REPLACE 'current_auth_string'";
+			UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
+			return selectedUserInfo;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 }
